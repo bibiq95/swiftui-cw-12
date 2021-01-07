@@ -8,6 +8,25 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    var body: some View {
+        
+    mainview()
+        .environmentObject(Env())
+        
+       
+        
+        }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
+
+
+struct mainview: View {
     @EnvironmentObject var env : Env
     var body: some View {
         VStack{
@@ -23,33 +42,27 @@ struct ContentView: View {
                     .padding()
                     .background(Color.blue.opacity(0.7))
                     .clipShape(RoundedRectangle(cornerRadius: 15))
-        }
-            .sheet(isPresented: $env.ismentor) {
-            
-                secondpage(env:self.env)
-        }
-            if env.name != ""
-         {
-            HStack{
-                Spacer()
-                VStack{
-                    Text("الاسم : \(env.name)")
-                    Text("العمر : \(env.age)")
-                    Text("التلفون : \(env.phone)")
-
-                }
-                .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
-                .padding()
             }
-        
-    
+            .sheet(isPresented: $env.ismentor) {
+                
+                secondpage(env:env)
+            }
+            if env.name != ""
+            {
+                HStack{
+                    Spacer()
+                    VStack{
+                        Text("الاسم : \(env.name)")
+                        Text("العمر : \(env.age)")
+                        Text("التلفون : \(env.phone)")
+                        
+                    }
+                    .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                    .padding()
+                }
+                
+                
+            }
         }
     }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
-}
 }
